@@ -3,6 +3,14 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import amlClient, { AML_SOURCES, DEFAULT_AML_MIN_SCORE, ENTITY_TYPES } from "./ofacapi_client.js";
 
+console.log("Sanctions MCP server starting. OFAC API key loaded:", !!process.env.OFAC_API_API_KEY);
+
+// Optional: heartbeat every 5 seconds to show MCP is alive
+//setInterval(() => console.log("MCP alive"), 5000);
+
+
+
+
 // Create an MCP server
 const server = new McpServer({
   name: "sanctions",
@@ -45,7 +53,7 @@ const caseSchema = z.object({
 
 // Add the scan tool with proper parameters and response handling
 server.tool(
-  "scan",
+  "search",
   {
     cases: z.array(caseSchema),
     type: z.enum(ENTITY_TYPES),

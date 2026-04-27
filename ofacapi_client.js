@@ -33,7 +33,7 @@ class AMLClient {
             cases,
         };
         
-        const response = await this.httpClient.post('/screen', req);
+        const response = await this.httpClient.post('/search', req);
         return response.data;
       } catch (error) {
         if (error.response) {
